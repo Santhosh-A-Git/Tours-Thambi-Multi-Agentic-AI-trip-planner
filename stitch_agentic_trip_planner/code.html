@@ -1,0 +1,243 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Agentic Trip Planner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#2c3a4c",
+                        "on-surface": "#d4e4fa",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-tertiary": "#283044",
+                        "surface-dim": "#051424",
+                        "on-background": "#d4e4fa",
+                        "on-primary": "#640039",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-container": "#122131",
+                        "inverse-on-surface": "#233143",
+                        "on-secondary": "#490080",
+                        "inverse-primary": "#b4136d",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "background": "#051424",
+                        "surface": "#051424",
+                        "secondary-fixed": "#f0dbff",
+                        "outline": "#a68992",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "tertiary": "#bec6e0",
+                        "surface-container-high": "#1c2b3c",
+                        "surface-tint": "#ffb0cd",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#f751a1",
+                        "on-primary-container": "#570032",
+                        "secondary": "#ddb7ff",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-secondary-container": "#d6a9ff",
+                        "tertiary-container": "#8990a8",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-primary-fixed": "#3e0022",
+                        "on-primary-fixed-variant": "#8c0053",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-variant": "#273647",
+                        "on-surface-variant": "#debec8",
+                        "primary": "#ffb0cd",
+                        "on-tertiary-container": "#22293d",
+                        "on-secondary-fixed": "#2c0051",
+                        "surface-container-highest": "#273647",
+                        "primary-fixed": "#ffd9e4",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "secondary-container": "#6f00be",
+                        "outline-variant": "#574048",
+                        "primary-fixed-dim": "#ffb0cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "subtitle-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "subtitle-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-image: radial-gradient(circle at top, #0f172a 0%, #030712 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(221, 183, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body-md bg-background antialiased selection:bg-primary selection:text-on-primary overflow-x-hidden flex flex-col">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-sm">
+<div class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ec4899] to-[#a855f7]">Tours Thambi</div>
+<nav class="hidden md:flex space-x-6">
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md hover:scale-105 transition-transform duration-200 cursor-pointer active:scale-95" href="#">Discover</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md hover:scale-105 transition-transform duration-200 cursor-pointer active:scale-95" href="#">My Trips</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md hover:scale-105 transition-transform duration-200 cursor-pointer active:scale-95" href="#">Saved</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-md hover:scale-105 transition-transform duration-200 cursor-pointer active:scale-95" href="#">Support</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Settings" class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button aria-label="Account" class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="hidden md:block bg-gradient-to-r from-[#ec4899] to-[#a855f7] text-white px-4 py-2 rounded-lg font-label-sm text-label-sm hover:scale-105 transition-transform duration-200 glow-effect cursor-pointer active:scale-95">
+                    Sign In
+                </button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-start relative z-10 w-full max-w-4xl mx-auto">
+<!-- Hero Section -->
+<div class="text-center mb-12 max-w-2xl">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-transparent bg-clip-text bg-gradient-to-r from-[#ec4899] to-[#a855f7] mb-4">Tours Thambi</h1>
+<p class="font-body-lg text-body-lg text-tertiary-container">
+                Describe your dream trip to Japan, and our AI agents will coordinate to build the perfect, verified itinerary.
+            </p>
+</div>
+<!-- Input Card -->
+<div class="w-full glass-card rounded-xl p-6 mb-8 transition-all duration-300 relative group">
+<div class="absolute inset-0 bg-gradient-to-r from-[#ec4899] to-[#a855f7] opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-xl pointer-events-none"></div>
+<div class="relative w-full mb-4">
+<textarea class="w-full bg-[#020617]/50 border border-slate-700/50 rounded-lg p-4 min-h-[120px] text-on-surface font-body-md focus:border-[#a855f7] focus:ring-1 focus:ring-[#a855f7] transition-all resize-none placeholder-slate-500" placeholder="I want to visit Tokyo for 5 days with a $2000 budget"></textarea>
+<button class="absolute bottom-4 right-4 p-2 bg-surface-container rounded-full text-secondary hover:text-primary transition-colors hover:scale-110 active:scale-95" title="Use Voice Input">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+<button class="w-full bg-gradient-to-r from-[#ec4899] to-[#a855f7] text-white rounded-lg py-3 flex items-center justify-center gap-2 font-subtitle-md text-subtitle-md font-semibold hover:scale-[1.02] transition-transform duration-200 glow-effect cursor-pointer active:scale-95 shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                Generate Itinerary
+            </button>
+</div>
+<!-- Output Card -->
+<div class="w-full glass-card rounded-xl p-6 transition-all duration-300 relative group hidden" id="output-card">
+<!-- Simulated Pulse Indicator -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#a855f7] to-transparent opacity-50 animate-pulse rounded-t-xl"></div>
+<div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+<h2 class="font-headline-md text-headline-md flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+                    Your Custom Itinerary
+                </h2>
+<button class="p-2 bg-surface-container/50 rounded-full text-tertiary hover:text-white transition-colors hover:scale-110 active:scale-95 border border-white/5" title="Listen to Itinerary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+</button>
+</div>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<div class="p-4 bg-surface-container-low/50 rounded-lg border border-white/5 hover:bg-surface-container/80 transition-colors">
+<h3 class="text-on-surface font-semibold mb-2 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full"></span>
+                        Day 1: Tokyo - Arrival
+                    </h3>
+<ul class="list-disc list-inside space-y-1 ml-2 text-sm">
+<li class="">Arrive at Narita/Haneda Airport</li>
+<li class="">Check into hotel in Shinjuku</li>
+<li class="">Evening exploration of Omoide Yokocho</li>
+</ul>
+</div>
+<div class="p-4 bg-surface-container-low/50 rounded-lg border border-white/5 hover:bg-surface-container/80 transition-colors">
+<h3 class="text-on-surface font-semibold mb-2 flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                        Day 2: Shibuya &amp; Harajuku
+                    </h3>
+<ul class="list-disc list-inside space-y-1 ml-2 text-sm">
+<li class="">Morning walk through Meiji Shrine</li>
+<li class="">Shopping in Takeshita Street</li>
+<li class="">Experience Shibuya Crossing at dusk</li>
+</ul>
+</div>
+<div class="p-4 bg-surface-container-low/50 rounded-lg border border-white/5 hover:bg-surface-container/80 transition-colors">
+<h3 class="text-on-surface font-semibold mb-2 flex items-center gap-2">
+<span class="w-2 h-2 bg-tertiary rounded-full"></span>
+                        Day 3: Asakusa &amp; Akihabara
+                    </h3>
+<ul class="list-disc list-inside space-y-1 ml-2 text-sm">
+<li class="">Visit Senso-ji Temple early morning</li>
+<li class="">Explore electronics and anime in Akihabara</li>
+<li class="">Dinner at a maid cafe (optional)</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-4">
+<div class="font-headline-md text-headline-md text-on-surface text-sm opacity-50">Tours Thambi</div>
+<div class="flex space-x-6 font-label-sm text-label-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+</div>
+<div class="text-secondary font-label-sm text-label-sm text-xs opacity-70">© 2024 Tours Thambi. Powered by Deep Space AI.</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for demo purposes
+        const generateBtn = document.querySelector('button:has(span:contains("auto_awesome"))');
+        const outputCard = document.getElementById('output-card');
+
+        if(generateBtn && outputCard) {
+            generateBtn.addEventListener('click', () => {
+                outputCard.classList.remove('hidden');
+                outputCard.style.opacity = '0';
+                outputCard.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    outputCard.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    outputCard.style.opacity = '1';
+                    outputCard.style.transform = 'translateY(0)';
+                }, 50);
+            });
+        }
+    </script>
+
+
+</body></html>
