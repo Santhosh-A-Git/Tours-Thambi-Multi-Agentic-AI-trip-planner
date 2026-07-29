@@ -99,7 +99,8 @@ function App() {
         setItinerary(data.itinerary);
       }
     } catch (err) {
-      setError('Failed to connect to the server. Please ensure the backend API is running on localhost:8000.');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      setError(`Network error. Trying to connect to: ${apiUrl}. Error: ${err.message}`);
     } finally {
       setLoading(false);
     }
