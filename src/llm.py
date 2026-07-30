@@ -13,8 +13,12 @@ def get_llm(temperature=0.0):
     transport = httpx.HTTPTransport(local_address="0.0.0.0")
     client = httpx.Client(transport=transport, timeout=60.0)
     
+    import os
+    api_key = os.environ.get("GROQ_API_KEY", "").strip()
+    
     return ChatGroq(
         model="llama-3.3-70b-versatile", 
         temperature=temperature,
-        http_client=client
+        http_client=client,
+        api_key=api_key
     )
