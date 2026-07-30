@@ -49,9 +49,11 @@ async def generate_plan(payload: PlanRequest):
         }
         
     except Exception as e:
+        import traceback
+        error_trace = traceback.format_exc()
         return {
             "success": False,
-            "feedback": [f"Internal Server Error: {str(e)}"],
+            "feedback": [f"Internal Server Error: {str(e)}\n\nTraceback:\n{error_trace}"],
             "itinerary": None
         }
 

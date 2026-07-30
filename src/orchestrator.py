@@ -23,7 +23,8 @@ def parse_request(request: str) -> TripState:
     and returns an initialized TripState.
     """
     # Initialize Groq LLM (Ensure GROQ_API_KEY is in environment variables)
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0) 
+    from src.llm import get_llm
+    llm = get_llm(temperature=0)
     
     # Use structured output to force the LLM to return data in the ConstraintsModel format
     structured_llm = llm.with_structured_output(ConstraintsModel)

@@ -17,6 +17,7 @@ def run_logistics_agent(state: TripState) -> Dict[str, Any]:
     
     wiki_context = ""
     try:
+        # pyrefly: ignore [missing-import]
         from duckduckgo_search import DDGS
         with DDGS() as ddgs:
             # If there's more than one city, search for transit between them
@@ -41,7 +42,8 @@ def run_logistics_agent(state: TripState) -> Dict[str, Any]:
 
     wiki_context = wiki_context[:3000]
     
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.2)
+    from src.llm import get_llm
+    llm = get_llm(temperature=0.2)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an expert Japan travel logistics planner. Based on the live search context below, formulate realistic transit plans between the user's cities, suggest the best transport methods (e.g. Shinkansen, planes), and recommend practical neighborhoods to stay in for easy transit access. Explicitly recommend whether the user should purchase a JR Pass (if doing expensive inter-city travel) or simply use a local IC Card like Suica/Pasmo (for local or single-city travel). Provide a concise JSON structure (e.g., {{'transit': [], 'hotels': [], 'pass_recommendation': ''}}).\n\nLive Search Context:\n{wiki_context}"),

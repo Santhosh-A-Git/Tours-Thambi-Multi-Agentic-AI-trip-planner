@@ -17,6 +17,7 @@ def run_destination_agent(state: TripState) -> Dict[str, Any]:
     
     wiki_context = ""
     try:
+        # pyrefly: ignore [missing-import]
         from duckduckgo_search import DDGS
         with DDGS() as ddgs:
             for city in cities:
@@ -35,7 +36,8 @@ def run_destination_agent(state: TripState) -> Dict[str, Any]:
     # Trim to fit strictly within TPM limits if needed
     wiki_context = wiki_context[:3000]
     
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.7)
+    from src.llm import get_llm
+    llm = get_llm(temperature=0.7)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an expert local Japan travel guide. Based on the live search context below, recommend top neighborhoods, temples, and experiences tailored to the user's constraints. Provide a strong distinction between different neighborhoods. Suggest authentic off-the-beaten-path local experiences alongside major spots to give a true local flavor. Focus strictly on the cities requested. Provide a concise JSON structure of recommendations (e.g., {{'cities': [{{'name': 'Tokyo', 'neighborhoods': [], 'pois': []}}] }}).\n\nLive Search Context:\n{wiki_context}"),

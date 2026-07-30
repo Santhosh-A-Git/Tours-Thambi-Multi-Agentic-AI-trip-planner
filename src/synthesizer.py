@@ -14,7 +14,8 @@ def run_synthesizer(state: TripState) -> Dict[str, Any]:
     """
     print("Synthesizer: Compiling draft itinerary...")
     
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.3)
+    from src.llm import get_llm
+    llm = get_llm(temperature=0.3)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are a master travel itinerary compiler. Combine the destination, logistics, and budget plans into a single, cohesive, day-by-day draft itinerary. Ensure all constraints are respected. Output the itinerary ONLY in a beautifully formatted Markdown layout that is easy to review. Do NOT output JSON."),

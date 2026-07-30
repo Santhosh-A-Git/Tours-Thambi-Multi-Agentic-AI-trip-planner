@@ -31,7 +31,8 @@ def run_budget_agent(state: TripState) -> Dict[str, Any]:
     exchange_rate = get_exchange_rate()
     print(f"Budget Agent: Current USD to JPY exchange rate is {exchange_rate}")
     
-    llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.2)
+    from src.llm import get_llm
+    llm = get_llm(temperature=0.2)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an expert Japan travel budget planner. Based on the scraped WikiVoyage 'Budget' text below, estimate the daily and total costs for the user's trip. Break down the costs into Stay, Transport, Food, and Activities. Flag if the plan is too expensive based on their constraints. The current exchange rate is 1 USD = {exchange_rate} JPY. Output a concise JSON structure (e.g., {{'total_cost': 0, 'breakdown': {{}}, 'is_over_budget': false, 'flags': []}}).\n\nWikiVoyage Context:\n{wiki_context}"),
